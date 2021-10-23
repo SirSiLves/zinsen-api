@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://zinsen-db-srv.database.windows.net:1433;database=pd-zinsen-db;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: server-admin
+    password: FFHS@Project!
+  jpa:
+    show-sql: false
