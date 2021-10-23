@@ -2,6 +2,7 @@ package me.ruosch.zinsen.features.zinsen.infrastruktur.rest;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsCreate;
 import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsQuery;
 import me.ruosch.zinsen.features.zinsen.service.ZinsenApplicationService;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping(value = "/api/zinsen", produces = MediaType.APPLICATION_JSON_VALUE)
+@CrossOrigin(origins = "*")
 public class ZinsenResource {
 
     private ZinsenApplicationService zinsenApplicationService;
@@ -25,8 +27,10 @@ public class ZinsenResource {
         return ResponseEntity.ok(zinsList);
     }
 
-    @PostMapping    public ResponseEntity<String> createZins(ZinsQuery zinsQuery) {
-        log.info("create zinsen {} ", zinsQuery.toString());        zinsenApplicationService.create(zinsQuery);
+    @PostMapping
+    public ResponseEntity<String> createZins(ZinsCreate zinsCreate) {
+        log.info("create zinsen {} ", zinsCreate.toString());
+        zinsenApplicationService.create(zinsCreate);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.ruosch.zinsen.features.zinsen.domain.Produkt;
 import me.ruosch.zinsen.features.zinsen.domain.Zins;
 import me.ruosch.zinsen.features.zinsen.infrastruktur.repository.ZinsenReporitory;
+import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsCreate;
 import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsQuery;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class ZinsenApplicationService {
 
         return zinsList.stream().map(z -> {
             ZinsQuery zinsQuery = new ZinsQuery();
+            zinsQuery.setId(z.getOid());
             zinsQuery.setZins(z.getKurs());
             zinsQuery.setLaufzeit(z.getLaufzeit());
             zinsQuery.setProdukt(z.getProdukt().toString());
@@ -33,19 +35,19 @@ public class ZinsenApplicationService {
         }).collect(Collectors.toList());
     }
 
-    public void create(ZinsQuery zinsQuery) {
+    public void create(ZinsCreate zinsCreate) {
         Zins zins = null;
 
-        if (zinsQuery.getProdukt().toUpperCase().equals(Produkt.SARON.toString())) {
+        if (zinsCreate.getProdukt().toUpperCase().equals(Produkt.SARON.toString())) {
             zins = Zins.makeSaron();
         }
 
-        if (zinsQuery.getProdukt().toUpperCase().equals(Produkt.VARIABLE.toString())) {
+        if (zinsCreate.getProdukt().toUpperCase().equals(Produkt.VARIABLE.toString())) {
             zins = Zins.makeVariable();
         }
 
-        if (zinsQuery.getProdukt().toUpperCase().equals(Produkt.FEST.toString())) {
-            zins = Zins.makeFest(zinsQuery.getLaufzeit());
+        if (zinsCreate.getProdukt().toUpperCase().equals(Produkt.FEST.toString())) {
+            zins = Zins.makeFest(zinsCreate.getLaufzeit());
         }
 
         if (zins != null) {

@@ -9,11 +9,9 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ZinsQuery {
+public class ZinsCreate {
 
-    private Long id;
     private String produkt;
     private int laufzeit;
-    private float zins;
 
 }
