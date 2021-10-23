@@ -1,4 +1,6 @@
 package me.ruosch.zinsen.features.zinsen.domain;
 
-public class Zinsen {
+
+public enum Produkt {
+    FEST, SARON, VARIABLE
 }
