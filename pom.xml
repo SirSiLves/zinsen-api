@@ -57,54 +57,45 @@
       <scope>test</scope> 
     </dependency> 
   </dependencies>  
-  <build> 
-    <pluginManagement> 
+  <build>
+    <finalName>app</finalName>
+    <pluginManagement>
       <plugins> 
-        <plugin> 
-          <groupId>org.springframework.boot</groupId>  
-          <artifactId>spring-boot-maven-plugin</artifactId>  
-          <configuration> 
-            <excludes> 
-              <exclude> 
-                <groupId>org.projectlombok</groupId>  
-                <artifactId>lombok</artifactId> 
-              </exclude> 
-            </excludes> 
-          </configuration> 
-        </plugin> 
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <configuration>
+            <excludes>
+              <exclude>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+              </exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>11</source>
+            <target>11</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <configuration>
+            <!-- Verhindert, dass der Stacktrace verkuerzt angezeigt wird ...
+                ist hilfreich bei Fehlersuche -->
+            <trimStackTrace>false</trimStackTrace>
+            <printSummary>true</printSummary>
+
+            <includes>
+              <include>**/*Unit*Test.java</include>
+            </includes>
+          </configuration>
+        </plugin>
       </plugins> 
-    </pluginManagement>  
-    <plugins>
-      <plugin>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>2.2.0</version>
-        <configuration>
-          <schemaVersion>v2</schemaVersion>
-          <subscriptionId>0c572597-ef1f-4a10-9e6f-90e8c86bfd96</subscriptionId>
-          <resourceGroup>RG01_ZINS</resourceGroup>
-          <appName>zinsen-api</appName>
-          <pricingTier>F1</pricingTier>
-          <region>westeurope</region>
-          <appServicePlanName>asp-zinsen</appServicePlanName>
-          <appServicePlanResourceGroup>RG01_ZINS</appServicePlanResourceGroup>
-          <runtime>
-            <os>Linux</os>
-            <javaVersion>Java 11</javaVersion>
-            <webContainer>Java SE</webContainer>
-          </runtime>
-          <deployment>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/target</directory>
-                <includes>
-                  <include>*.jar</include>
-                </includes>
-              </resource>
-            </resources>
-          </deployment>
-        </configuration>
-      </plugin>
-    </plugins>
+    </pluginManagement>
   </build> 
 </project>
