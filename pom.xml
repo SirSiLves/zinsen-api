@@ -58,7 +58,7 @@
     </dependency> 
   </dependencies>  
   <build>
-    <finalName>app</finalName>
+    <finalName>java-app-zinsen-api</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
