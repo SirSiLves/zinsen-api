@@ -2,7 +2,7 @@ app:
   env:
     desc: Produktion
     test: true
-    code: pd
+    code: production
 
 
 spring:
