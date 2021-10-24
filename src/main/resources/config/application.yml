@@ -5,3 +5,13 @@ spring:
     hibernate:
       ddl-auto: update
       dialect: org.hibernate.dialect.SQLServer2012Dialect
+  datasource:
+    url: jdbc:sqlserver://zinsen-db-srv.database.windows.net:1433;database=pd-zinsen-db;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: server-admin
+    password: FFHS@Project!
+
+app:
+  env:
+    desc: Produktion
+    test: true
+    code: production
