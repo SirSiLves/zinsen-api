@@ -60,7 +60,21 @@
   <build>
     <finalName>app</finalName>
     <pluginManagement>
-      <plugins> 
+      <plugins>
+        <plugin>
+          <!-- Building an executable jar -->
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.2.0</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <!-- give full qualified name of your main class-->
+                <mainClass>me.ruosch.zinsen.ZinsenApplication</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
@@ -71,28 +85,6 @@
                 <artifactId>lombok</artifactId>
               </exclude>
             </excludes>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <source>11</source>
-            <target>11</target>
-          </configuration>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin.version}</version>
-          <configuration>
-            <!-- Verhindert, dass der Stacktrace verkuerzt angezeigt wird ...
-                ist hilfreich bei Fehlersuche -->
-            <trimStackTrace>false</trimStackTrace>
-            <printSummary>true</printSummary>
-
-            <includes>
-              <include>**/*Unit*Test.java</include>
-            </includes>
           </configuration>
         </plugin>
       </plugins> 
