@@ -1,3 +1,10 @@
+app:
+  env:
+    desc: Produktion
+    test: true
+    code: pd
+
+
 spring:
   datasource:
     url: jdbc:sqlserver://zinsen-db-srv.database.windows.net:1433;database=pd-zinsen-db;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;

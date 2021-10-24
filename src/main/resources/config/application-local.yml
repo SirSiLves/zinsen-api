@@ -1,3 +1,9 @@
+app:
+  environment:
+    description: Local
+    test: true
+    code: local
+
 spring:
   datasource:
     url: jdbc:sqlserver://zinsen-db-srv.database.windows.net:1433;database=local-zinsen-db;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
