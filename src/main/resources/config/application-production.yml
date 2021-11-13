@@ -12,3 +12,7 @@ spring:
     password: FFHS@Project!
   jpa:
     show-sql: false
+
+me:
+  ruosch:
+    calculate-url: https://zinsen-calculation.azurewebsites.net/api/calculation

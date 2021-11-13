@@ -86,6 +86,10 @@ public class Zins extends BaseEntity {
         this.kurs = kurs;
     }
 
+    public Laufzeit getTypeLaufzeit() {
+        return laufzeit;
+    }
+
     public int getLaufzeit() {
         switch(this.laufzeit){
             case ONE:

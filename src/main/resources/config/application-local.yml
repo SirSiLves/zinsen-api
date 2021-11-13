@@ -12,4 +12,8 @@ spring:
   jpa:
     show-sql: true
 
+me:
+  ruosch:
+    calculate-url: http://localhost:7071/api/calculation
+
 

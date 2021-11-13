@@ -27,6 +27,13 @@ public class ZinsenResource {
         return ResponseEntity.ok(zinsList);
     }
 
+    @PutMapping(value = {"/{id}"})
+    public ResponseEntity<ZinsQuery> calculateZins(@PathVariable long id) {
+        log.info("Zins {} wird berechnet ", id);
+        ZinsQuery zinsQuery = zinsenApplicationService.calculate(id);
+        return ResponseEntity.ok(zinsQuery);
+    }
+
     @PostMapping
     public ResponseEntity<String> createZins(ZinsCreate zinsCreate) {
         log.info("create zinsen {} ", zinsCreate.toString());
