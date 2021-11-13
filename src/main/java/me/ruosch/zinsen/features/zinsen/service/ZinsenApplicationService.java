@@ -42,10 +42,6 @@ public class ZinsenApplicationService {
             zins = Zins.makeSaron();
         }
 
-        if (zinsCreate.getProdukt().toUpperCase().equals(Produkt.VARIABLE.toString())) {
-            zins = Zins.makeVariable();
-        }
-
         if (zinsCreate.getProdukt().toUpperCase().equals(Produkt.FEST.toString())) {
             zins = Zins.makeFest(zinsCreate.getLaufzeit());
         }
