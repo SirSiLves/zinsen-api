@@ -24,14 +24,6 @@ public class Zins extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Laufzeit laufzeit;
 
-    public static Zins makeVariable() {
-        Zins zins = new Zins();
-        zins.produkt = Produkt.VARIABLE;
-        zins.laufzeit = Laufzeit.INDEFINITE;
-
-        return zins;
-    }
-
     public static Zins makeSaron() {
         Zins zins = new Zins();
         zins.produkt = Produkt.SARON;
