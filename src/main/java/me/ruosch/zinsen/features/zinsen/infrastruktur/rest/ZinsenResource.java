@@ -40,5 +40,13 @@ public class ZinsenResource {
         zinsenApplicationService.create(zinsCreate);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @DeleteMapping(value = {"/{id}"})
+    public ResponseEntity<String> deleteZins(@PathVariable long id) {
+        log.info("Zins {} wird gelöscht ", id);
+        zinsenApplicationService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
 }
 

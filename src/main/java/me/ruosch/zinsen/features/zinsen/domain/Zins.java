@@ -1,6 +1,10 @@
 package me.ruosch.zinsen.features.zinsen.domain;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -9,6 +13,7 @@ import me.ruosch.zinsen.shared.BaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.time.LocalDateTime;
 
 @ToString
 @Getter
@@ -23,6 +28,10 @@ public class Zins extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Laufzeit laufzeit;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime zuletztBerechnet;
 
     public static Zins makeSaron() {
         Zins zins = new Zins();
@@ -84,6 +93,7 @@ public class Zins extends BaseEntity {
 
     public void changeKurs(float kurs) {
         this.kurs = kurs;
+        this.zuletztBerechnet = LocalDateTime.now();
     }
 
     public Laufzeit getTypeLaufzeit() {

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @ToString
 @Data
 @AllArgsConstructor
@@ -15,5 +17,6 @@ public class ZinsQuery {
     private String produkt;
     private int laufzeit;
     private float zins;
+    private LocalDateTime zuletztBerechnet;
 
 }

@@ -50,6 +50,8 @@ public class ZinsenApplicationService {
 
             calculateRepository.calculate(z);
 
+            zinsenRepository.save(z);
+
             return this.mapZinsToZinsQuery(z);
         }
 
@@ -62,7 +64,13 @@ public class ZinsenApplicationService {
         zinsQuery.setZins(zins.getKurs());
         zinsQuery.setLaufzeit(zins.getLaufzeit());
         zinsQuery.setProdukt(zins.getProdukt().toString());
+        zinsQuery.setZuletztBerechnet(zins.getZuletztBerechnet());
 
         return zinsQuery;
+    }
+
+    public void delete(long id) {
+        Optional<Zins> byId = zinsenRepository.findById(id);
+        byId.ifPresent(zins -> this.zinsenRepository.delete(zins));
     }
 }
