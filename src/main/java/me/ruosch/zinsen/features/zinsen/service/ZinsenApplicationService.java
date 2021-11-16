@@ -1,5 +1,6 @@
 package me.ruosch.zinsen.features.zinsen.service;
 
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.ruosch.zinsen.features.zinsen.domain.Produkt;
@@ -10,8 +11,10 @@ import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsCreate;
 import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsQuery;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -21,6 +24,7 @@ public class ZinsenApplicationService {
 
     private ZinsenRepository zinsenRepository;
     private CalculateRepository calculateRepository;
+    private HikariDataSource dataSource;
 
     public List<ZinsQuery> listAll() {
         List<Zins> zinsList = this.zinsenRepository.findAll();
@@ -72,5 +76,44 @@ public class ZinsenApplicationService {
     public void delete(long id) {
         Optional<Zins> byId = zinsenRepository.findById(id);
         byId.ifPresent(zins -> this.zinsenRepository.delete(zins));
+    }
+
+    public Integer simulate(long durchlaeufe) {
+        ArrayList<Thread> threadList = new ArrayList<>();
+        AtomicInteger successCount = new AtomicInteger();
+
+        // create threads
+        for (int j = 0; j < durchlaeufe; j++) {
+            threadList.add(new Thread(() -> {
+                try {
+                    List<Zins> all = zinsenRepository.findAll();
+                    for (Zins zins : all) {
+                        Optional<Zins> byId = zinsenRepository.findById(zins.getOid());
+                        if (byId.isPresent()) {
+                            Zins dbZins = byId.get();
+                        }
+                    }
+                    successCount.getAndIncrement();
+                } catch (Exception e) {
+                    // error occurred..
+                }
+            }));
+        }
+
+        // start all threads
+        for (Thread t : threadList) {
+            t.start();
+        }
+
+        // wait until all are finished
+        threadList.forEach(t -> {
+            try {
+                t.join();
+            } catch (Exception e) {
+                // error occurred..
+            }
+        });
+
+        return successCount.get();
     }
 }

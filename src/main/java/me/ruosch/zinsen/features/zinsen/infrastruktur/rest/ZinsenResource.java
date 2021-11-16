@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @AllArgsConstructor
@@ -29,7 +30,7 @@ public class ZinsenResource {
 
     @PutMapping(value = {"/{id}"})
     public ResponseEntity<ZinsQuery> calculateZins(@PathVariable long id) {
-        log.info("Zins {} wird berechnet ", id);
+        log.info("Zins mit der ID {} wird berechnet ", id);
         ZinsQuery zinsQuery = zinsenApplicationService.calculate(id);
         return ResponseEntity.ok(zinsQuery);
     }
@@ -47,6 +48,13 @@ public class ZinsenResource {
         zinsenApplicationService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
 
+    }
+
+    @PostMapping(value = {"/simulation/{durchlaeufe}"})
+    public ResponseEntity<Integer> starteSimulation(@PathVariable long durchlaeufe) {
+        log.info("Starte Zinsen abfrage mit {} durchläufe", durchlaeufe);
+        int count = zinsenApplicationService.simulate(durchlaeufe);
+        return ResponseEntity.ok(count);
     }
 }
 

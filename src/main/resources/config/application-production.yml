@@ -10,6 +10,12 @@ spring:
     url: jdbc:sqlserver://zinsen-db-srv.database.windows.net:1433;database=pd-zinsen-db;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
     username: server-admin
     password: FFHS@Project!
+    hikari:
+      maximum-pool-size: 10000
+      connection-timeout: 300000 # 5 minutes
+      validation-timeout: 300000 # 5 minutes
+      max-lifetime: 300000 # 5 minutes
+      idle-timeout: 300000 # 5 minutes
   jpa:
     show-sql: false
 
