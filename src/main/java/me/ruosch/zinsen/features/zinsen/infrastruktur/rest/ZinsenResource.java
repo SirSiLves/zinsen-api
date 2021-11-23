@@ -28,7 +28,7 @@ public class ZinsenResource {
         return ResponseEntity.ok(zinsList);
     }
 
-    @GetMapping
+    @GetMapping(path = "/test")
     public ResponseEntity<List<ZinsQuery>> pruefeGitHubPipeline() {
         List<ZinsQuery> zinsList = zinsenApplicationService.listAll();
         return ResponseEntity.ok(zinsList);
