@@ -28,12 +28,6 @@ public class ZinsenResource {
         return ResponseEntity.ok(zinsList);
     }
 
-    @GetMapping(path = "/test")
-    public ResponseEntity<List<ZinsQuery>> pruefeGitHubPipeline() {
-        List<ZinsQuery> zinsList = zinsenApplicationService.listAll();
-        return ResponseEntity.ok(zinsList);
-    }
-
     @PutMapping(value = {"/{id}"})
     public ResponseEntity<ZinsQuery> calculateZins(@PathVariable long id) {
         log.info("Zins mit der ID {} wird berechnet ", id);
