@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+
 
 @Slf4j
 @AllArgsConstructor
@@ -24,6 +24,12 @@ public class ZinsenResource {
 
     @GetMapping
     public ResponseEntity<List<ZinsQuery>> getAllZinsen() {
+        List<ZinsQuery> zinsList = zinsenApplicationService.listAll();
+        return ResponseEntity.ok(zinsList);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ZinsQuery>> pruefeGitHubPipeline() {
         List<ZinsQuery> zinsList = zinsenApplicationService.listAll();
         return ResponseEntity.ok(zinsList);
     }
