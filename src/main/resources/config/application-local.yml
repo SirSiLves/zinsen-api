@@ -23,4 +23,11 @@ me:
   ruosch:
     calculate-url: http://localhost:7071/api/calculation
 
+azure:
+  application-insights:
+    instrumentation-key: 37402c98-17e2-4f2c-a6ac-0355e698ff34
+    web:
+      enable-W3C: true
+      enable-W3C-backcompat-mode: true
+
 

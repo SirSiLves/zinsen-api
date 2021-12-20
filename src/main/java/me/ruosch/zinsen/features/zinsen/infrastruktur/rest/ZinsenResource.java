@@ -1,10 +1,13 @@
 package me.ruosch.zinsen.features.zinsen.infrastruktur.rest;
 
+import com.microsoft.applicationinsights.TelemetryClient;
+import com.microsoft.applicationinsights.telemetry.TelemetryContext;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsCreate;
 import me.ruosch.zinsen.features.zinsen.infrastruktur.rest.dto.ZinsQuery;
 import me.ruosch.zinsen.features.zinsen.service.ZinsenApplicationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,31 +23,39 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ZinsenResource {
 
+    private TelemetryClient telemetryClient;
     private ZinsenApplicationService zinsenApplicationService;
 
     @GetMapping
     public ResponseEntity<List<ZinsQuery>> getAllZinsen() {
+        telemetryClient.trackEvent("Zinsen werden abgefragt");
         List<ZinsQuery> zinsList = zinsenApplicationService.listAll();
         return ResponseEntity.ok(zinsList);
     }
 
     @PutMapping(value = {"/{id}"})
     public ResponseEntity<ZinsQuery> calculateZins(@PathVariable long id) {
-        log.info("Zins mit der ID {} wird berechnet ", id);
+        String logValue = "Zins mit der ID " + id + " wird berechnet ";
+        telemetryClient.trackEvent(logValue);
+        log.info(logValue);
         ZinsQuery zinsQuery = zinsenApplicationService.calculate(id);
         return ResponseEntity.ok(zinsQuery);
     }
 
     @PostMapping
     public ResponseEntity<String> createZins(ZinsCreate zinsCreate) {
-        log.info("create zinsen {} ", zinsCreate.toString());
+        String logValue = "create zinsen " + zinsCreate.toString() + "";
+        telemetryClient.trackEvent(logValue);
+        log.info(logValue);
         zinsenApplicationService.create(zinsCreate);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = {"/{id}"})
     public ResponseEntity<String> deleteZins(@PathVariable long id) {
-        log.info("Zins {} wird gelöscht ", id);
+        String logValue = "Zins " + id + " wird gelöscht";
+        telemetryClient.trackEvent(logValue);
+        log.info(logValue);
         zinsenApplicationService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
 
@@ -52,7 +63,9 @@ public class ZinsenResource {
 
     @PostMapping(value = {"/simulation/{durchlaeufe}"})
     public ResponseEntity<Integer> starteSimulation(@PathVariable long durchlaeufe) {
-        log.info("Starte Zinsen abfrage mit {} durchläufe", durchlaeufe);
+        String logValue = "Starte Zinsen abfrage mit " + durchlaeufe + " durchläufe";
+        telemetryClient.trackEvent(logValue);
+        log.info(logValue);
         int count = zinsenApplicationService.simulate(durchlaeufe);
         return ResponseEntity.ok(count);
     }
