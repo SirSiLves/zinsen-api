@@ -26,7 +26,4 @@ me:
 # Specify the instrumentation key of your Application Insights resource.
 azure:
   application-insights:
-    name: zinsen-api
     instrumentation-key: f6cd9c06-8e06-4ddc-9013-7bd63c008042
-    web:
-      enable-W3C: true
