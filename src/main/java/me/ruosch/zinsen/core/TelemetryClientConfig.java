@@ -24,7 +24,6 @@ public class TelemetryClientConfig {
     public TelemetryConfiguration telemetryConfiguration() {
         TelemetryConfiguration telemetryConfiguration = TelemetryConfiguration.getActive();
         telemetryConfiguration.setInstrumentationKey(instrumentationKey);
-        telemetryConfiguration.setConnectionString("InstrumentationKey=37402c98-17e2-4f2c-a6ac-0355e698ff34;IngestionEndpoint=https://westeurope-5.in.applicationinsights.azure.com/");
         telemetryConfiguration.setRoleName(roleName);
 
         return telemetryConfiguration;
