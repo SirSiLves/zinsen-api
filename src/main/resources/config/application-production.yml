@@ -22,3 +22,8 @@ spring:
 me:
   ruosch:
     calculate-url: https://zinsen-calculation.azurewebsites.net/api/calculation
+
+# Specify the instrumentation key of your Application Insights resource.
+azure:
+  application-insights:
+    instrumentation-key: 37402c98-17e2-4f2c-a6ac-0355e698ff34
