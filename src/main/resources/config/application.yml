@@ -1,6 +1,8 @@
 spring:
+  application:
+    name: zinsen-api
   profiles:
-    active: production #local
+    active: production #production #local
   jpa:
     hibernate:
       ddl-auto: update

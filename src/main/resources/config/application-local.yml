@@ -25,6 +25,7 @@ me:
 
 azure:
   application-insights:
+    name: zinsen-api
     instrumentation-key: 37402c98-17e2-4f2c-a6ac-0355e698ff34
     web:
       enable-W3C: true
