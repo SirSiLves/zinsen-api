@@ -59,7 +59,7 @@
     <!-- Used for Azure App Services    -->
     <dependency>
       <groupId>com.microsoft.azure</groupId>
-      <artifactId>applicationinsights-web</artifactId>
+      <artifactId>applicationinsights-web-auto</artifactId>
       <version>2.6.4</version>
     </dependency>
     <dependency>
