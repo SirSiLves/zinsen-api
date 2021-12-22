@@ -87,12 +87,6 @@ public class ZinsenApplicationService {
             threadList.add(new Thread(() -> {
                 try {
                     List<Zins> all = zinsenRepository.getDataWithLoad();
-                    for (Zins zins : all) {
-                        Optional<Zins> byId = zinsenRepository.findById(zins.getOid());
-                        if (byId.isPresent()) {
-                            Zins dbZins = byId.get();
-                        }
-                    }
                     successCount.getAndIncrement();
                 } catch (Exception e) {
                     // error occurred..

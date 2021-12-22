@@ -17,7 +17,17 @@ public interface ZinsenRepository extends JpaRepository<Zins, Long> {
             "FULL JOIN zins as z7 ON z6.oid = z7.oid\n" +
             "FULL JOIN zins as z8 ON z7.oid = z8.oid\n" +
             "FULL JOIN zins as z9 ON z8.oid = z9.oid\n" +
-            "FULL JOIN zins as z10 ON z9.oid = z10.oid")
+            "FULL JOIN zins as z10 ON z9.oid = z10.oid\n" +
+            "FULL JOIN zins as z11 ON z10.oid = z11.oid\n" +
+            "FULL JOIN zins as z12 ON z11.oid = z12.oid\n" +
+            "FULL JOIN zins as z13 ON z12.oid = z13.oid\n" +
+            "FULL JOIN zins as z14 ON z13.oid = z14.oid\n" +
+            "FULL JOIN zins as z15 ON z14.oid = z15.oid\n" +
+            "FULL JOIN zins as z16 ON z15.oid = z16.oid\n" +
+            "FULL JOIN zins as z17 ON z16.oid = z17.oid\n" +
+            "FULL JOIN zins as z18 ON z17.oid = z18.oid\n" +
+            "FULL JOIN zins as z19 ON z18.oid = z19.oid\n" +
+            "FULL JOIN zins as z20 ON z19.oid = z20.oid")
     List<Zins> getDataWithLoad();
 
 
