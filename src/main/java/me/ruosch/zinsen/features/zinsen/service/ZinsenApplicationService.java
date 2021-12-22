@@ -86,7 +86,7 @@ public class ZinsenApplicationService {
         for (int j = 0; j < durchlaeufe; j++) {
             threadList.add(new Thread(() -> {
                 try {
-                    List<Zins> all = zinsenRepository.findAll();
+                    List<Zins> all = zinsenRepository.getDataWithLoad();
                     for (Zins zins : all) {
                         Optional<Zins> byId = zinsenRepository.findById(zins.getOid());
                         if (byId.isPresent()) {
@@ -115,5 +115,9 @@ public class ZinsenApplicationService {
         });
 
         return successCount.get();
+    }
+
+    public List<ZinsQuery> listDataWithLoad() {
+        return this.zinsenRepository.getDataWithLoad().stream().map(this::mapZinsToZinsQuery).collect(Collectors.toList());
     }
 }
